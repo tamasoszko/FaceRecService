@@ -237,15 +237,17 @@ def recognize_face():
 def image_download(image_name):
     fn = config['image_path'] + image_name
     mime_type = mimetypes.guess_type(fn)[0]
+    if not os.path.exists(fn):
+        abort(404)
     return send_file(fn, mimetype=mime_type)
 
 
 config = load_from_json_file('config.json')
-
+print("Start server on '" + config['host'] + ":" + str(config['port']) + "'") 
 if __name__ == "__main__":
     if model is None:
         model = load_model()
-    app.run()
+    app.run(host=config['host'], port=config['port'])
 
 
 # In[ ]:
