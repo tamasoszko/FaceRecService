@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[ ]:
 
 import numpy as np
 from flask import Flask
@@ -34,14 +34,14 @@ import mimetypes
 from functools import wraps
 
 
-# In[2]:
+# In[ ]:
 
 database = None
 model = None
  
 
 
-# In[3]:
+# In[ ]:
 
 def triplet_loss(y_true, y_pred, alpha = 0.2):
     """
@@ -222,10 +222,11 @@ def handle_user(id):
 @require_api_token
 def recognize_face():
     database = load_from_json_file('data.json')
-    data = request.get_data()
-    save_file("temp.png", data)
-    min_dist, user_id = who_is_it("temp.png", database, model)
-    print(min_dist)
+    f = request.files['image']
+    temp_fn = "tmp/" + str(uuid.uuid4())
+    f.save(temp_fn)
+    min_dist, user_id = who_is_it(temp_fn, database, model)
+    os.remove(temp_fn)
     result = {}
     if user_id is None:
         return str({'status': 'not found'})  + "\n"
