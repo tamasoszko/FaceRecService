@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[16]:
+# In[1]:
 
 import numpy as np
 from flask import Flask
@@ -34,14 +34,14 @@ import mimetypes
 from functools import wraps
 
 
-# In[6]:
+# In[2]:
 
 database = None
 model = None
  
 
 
-# In[7]:
+# In[3]:
 
 def triplet_loss(y_true, y_pred, alpha = 0.2):
     """
@@ -150,7 +150,7 @@ def load_from_json_file(filename):
         return data
 
 
-# In[17]:
+# In[ ]:
 
 
 app = Flask(__name__)
