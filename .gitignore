@@ -11,6 +11,8 @@ instance/
 .ipynb_checkpoints
 
 images/
+tmp/
+tools/
 
 config.json
 data.json
